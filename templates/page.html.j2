@@ -1,0 +1,13 @@
+{% from 'navbar.html.j2' import render_nav as render_nav %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <title>{{page_title}}</title>
+    {% include 'header.html.j2' %}
+  </head>
+  <body>
+    {{ render_nav(nav_bar_items) }}
+    {% block body %}{% endblock %}
+  </body>
+  {% include 'footer.html.j2' %}
+</html>

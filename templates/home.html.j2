@@ -1,0 +1,14 @@
+{# extend based on regular page #}
+{% extends 'page.html.j2'%}
+
+{# set the page title#}
+{% set page_title = 'Home' %}
+{# set the body block #}
+{% block body %}
+<main role="main" class="container">
+  <div class="starter-template">
+    <h1>Welcome to PlaqManager!</h1>
+    <p class="lead">Click on Plaq Settings above to change the settings of a Plaq device.</p>
+  </div>
+</main>
+{% endblock %}
