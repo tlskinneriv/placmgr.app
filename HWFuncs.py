@@ -9,5 +9,5 @@ def send_packet(packet):
     ser = serial.Serial('/dev/ttyAMA0', 1200, timeout=1)
     encoded_bytes = base64encode(packet.id + ':') + packet.data
     ser.open()
-    ser.write(str(encoded_bytes))
+    ser.write(encoded_bytes)
     ser.close()
