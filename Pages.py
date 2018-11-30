@@ -38,21 +38,27 @@ navbar_pages = [
 ]
 
 # set default render function
-def default_render_function(temp_name, page_title, **kwargs):
-    return render_template(temp_name, navbar_pages=navbar_pages, page_title=page_title, **kwargs)
+def default_render_function(page, **kwargs):
+    return render_template(page.template_name_full(), navbar_pages=navbar_pages, page_title=page.title, **kwargs)
 
 # set render function and other options for specific pages
-def plaq_settings_render(temp_name, page_title):
+def plaq_settings_render(page):
     form = Forms.PlaqSettingsForm(request.form)
     if request.method == 'POST' and form.validate():
         # setup plaq comm handler
         plaq = PlaqComm('plaq1', 'plaq1') #TODO dynamically get from DB
-        plaq.send_data(
+        result = plaq.send_data(
             computer_name = form.computer_name.data,
             ip_address = form.ip_address.data,
             subnet_mask = form.subnet_mask.data,
             gateway = form.gateway.data
         )
-    return default_render_function(temp_name, page_title, form=form)
+        if result == True:
+            message='<p class="message-good">Sent settings successfully.</p>'
+        else:
+            message = '<p class="message-bad">Failed to send settings:<br/>' + str(result).replace('\n', '<br/>') + '</p>'
+            print(str(result))
+        return default_render_function(page, form=form, message=message)
+    return default_render_function(page, form=form)
 pages['plaq_settings'].set_methods(['GET', 'POST'])
 pages['plaq_settings'].set_render_function(plaq_settings_render)

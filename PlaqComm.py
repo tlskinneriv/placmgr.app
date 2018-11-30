@@ -16,10 +16,14 @@ class PlaqComm:
         self.aes_mode = AES.MODE_CBC
 
     def send_data(self, **kwargs):
-        json_data = json.dumps(kwargs)
-        enc_data = self.__json_to_enc(json_data)
-        packet = PlaqPacket(self.id, enc_data)
-        HWFuncs.send_packet(packet)
+        try:
+            json_data = json.dumps(kwargs)
+            enc_data = self.__json_to_enc(json_data)
+            packet = PlaqPacket(self.id, enc_data)
+            HWFuncs.send_packet(packet)
+            return True
+        except Exception as e:
+            return e
 
     def __json_to_enc(self, json_string):
         iv = Random.new().read(16) # always 16 bytes of random for IV
