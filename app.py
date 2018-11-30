@@ -3,9 +3,6 @@ from NavItemObject import NavItemObject
 import Forms
 from PlaqComm import PlaqComm
 
-# set up the plaq comm client
-plaq = PlaqComm('01234567890123456789012345678901')
-
 # set up the Flask web app
 app = Flask(__name__)
 app.debug = True
@@ -31,6 +28,8 @@ page.methods = ['GET', 'POST']
 def plaq_settings_handler(temp_name, nav_items):
     form = Forms.PlaqSettingsForm(request.form)
     if request.method == 'POST' and form.validate():
+        # setup plaq comm handler
+        plaq = PlaqComm('plaq1', 'plaq1') #TODO dynamically get from DB
         plaq.send_data(
             computer_name = form.computer_name.data,
             ip_address = form.ip_address.data,
