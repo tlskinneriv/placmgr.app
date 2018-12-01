@@ -8,7 +8,6 @@ app.debug = True
 
 # set up the hardware
 HWFuncs.serial_port = '/dev/ttyAMA0'
-HWFuncs.start_IR_clock()
 
 # takes care of showing pages and content
 for name, page in Pages.pages.items():
