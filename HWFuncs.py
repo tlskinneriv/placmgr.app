@@ -20,10 +20,11 @@ def send_packet(packet):
     encoded_bytes = base64encode((packet.id + ':').encode()) + packet.data
     try:
         start_IR_clock()
-        ser = serial.Serial(serial_port, 1200, timeout=1)
+        ser = serial.Serial(serial_port, 1200, timeout=0)
         if ser.isOpen() == False:
             ser.open()
         ser.write(encoded_bytes)
+        ser.read()
         ser.close()
         stop_IR_clock()
     except Exception as e:
