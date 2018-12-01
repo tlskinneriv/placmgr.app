@@ -32,7 +32,7 @@ def send_packet(packet):
 
 def start_IR_clock():
     pi = pigpio.pi()
-    pi.hardware_PWM(18, 38000, 300000)
+    pi.hardware_PWM(18, 38000, 500000)
 
 def stop_IR_clock():
     pi = pigpio.pi()
