@@ -21,4 +21,6 @@ for name, page in Pages.pages.items():
     app.add_url_rule(page.route, endpoint=page.template_name, view_func=func, **kargs)
 
 if __name__ == '__main__':
+    # run the serial clock
+    HWFuncs.start_IR_clock()
     app.run(host='0.0.0.0', port=80)
