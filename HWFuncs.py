@@ -17,7 +17,11 @@ class HWFuncException(Exception):
 
 serial_port = '/dev/tty'
 def send_packet(packet):
+<<<<<<< HEAD
     encoded_bytes = base64encode((packet.id + ':').encode() + packet.data)
+=======
+    encoded_bytes = base64encode((packet.id + ':').encode() + packet.data))
+>>>>>>> 89dc9246a790a4f5afcc539d69f3835415a41d32
     print(encoded_bytes)
     try:
         start_IR_clock()
