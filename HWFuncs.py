@@ -24,7 +24,7 @@ def send_packet(packet):
         if ser.isOpen() == False:
             ser.open()
         ser.write(encoded_bytes)
-        ser.read()
+        ser.flush()
         ser.close()
         stop_IR_clock()
     except Exception as e:
