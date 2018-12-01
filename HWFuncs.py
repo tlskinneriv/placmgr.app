@@ -33,7 +33,9 @@ def send_packet(packet):
 def start_IR_clock():
     pi = pigpio.pi()
     pi.hardware_clock(4, 38000)
+    pi.stop()
 
 def stop_IR_clock():
     pi = pigpio.pi()
     pi.hardware_clock(4, 0)
+    pi.stop()
