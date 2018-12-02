@@ -46,7 +46,7 @@ def plaq_settings_render(page):
     form = Forms.PlaqSettingsForm(request.form)
     if request.method == 'POST' and form.validate():
         # setup plaq comm handler
-        plaq = PlaqComm('plaq1', 'plaq1') #TODO dynamically get from DB
+        plaq = PlaqComm('A1', 'plaq') #TODO dynamically get from DB
         result = plaq.send_data(
             computer_name = form.computer_name.data,
             ip_address = form.ip_address.data,
