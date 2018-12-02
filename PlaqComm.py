@@ -27,7 +27,7 @@ class PlaqComm:
 
     def __json_to_enc(self, json_string):
         #iv = Random.new().read(16) # always 16 bytes of random for IV
-        iv = bytearray(16)
+        iv = b'\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0'
         encryptor = AES.new(self.key, self.aes_mode, iv)
         return iv + encryptor.encrypt(pad_data(json_string))
 
