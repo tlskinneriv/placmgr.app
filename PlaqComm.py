@@ -20,7 +20,7 @@ class PlaqComm:
             json_data = json.dumps(kwargs)
             # enc_data = self.__json_to_enc(json_data)
             # packet = PlaqPacket(self.id, enc_data)
-            packet = PlaqPacket(self.id, pad_data(json_string))
+            packet = PlaqPacket(self.id, pad_data(json_data))
             HWFuncs.send_packet(packet)
             return True
         except Exception as e:
