@@ -51,7 +51,8 @@ def plaq_settings_render(page):
             computer_name = form.computer_name.data,
             ip_address = form.ip_address.data,
             subnet_mask = form.subnet_mask.data,
-            gateway = form.gateway.data
+            gateway = form.gateway.data,
+            network = form.network.data
         )
         if result == True:
             message='<p class="message-good">Sent settings successfully.</p>'

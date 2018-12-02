@@ -25,3 +25,6 @@ class PlaqSettingsForm(Form):
             validators.Length(min=7, max=15),
             validators.Regexp(ip_addr_regex, message=ip_addr_message)
         ])
+    network = StringField('Network Name', [
+            validators.Length(min=1, max=15),
+        ])
