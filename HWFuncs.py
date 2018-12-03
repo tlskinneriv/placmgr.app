@@ -20,7 +20,7 @@ serial_port = '/dev/tty'
 def send_packet(packet):
     encoded_bytes = base64encode((packet.id + ':' + str(len(packet.data)) + ':').encode() + packet.data)
     print(encoded_bytes)
-    tmr_string = b'[' + encoded_bytes + b'][' + encoded_bytes + b'][' + encoded_bytes + b']'
+    tmr_string = b'[[[' + encoded_bytes + b']]][[[' + encoded_bytes + b']]][[[' + encoded_bytes + b']]]'
     print(tmr_string)
     try:
         start_IR_clock()
