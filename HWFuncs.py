@@ -25,7 +25,7 @@ def send_packet(packet):
     try:
         start_IR_clock()
         time.sleep(.500) #wait for clock to stabilize
-        ser = serial.Serial(serial_port, 1200, timeout=0)
+        ser = serial.Serial(serial_port, 4800, timeout=0)
         if ser.isOpen() == False:
             ser.open()
         ser.write(tmr_string)
