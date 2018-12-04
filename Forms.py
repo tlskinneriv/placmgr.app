@@ -3,7 +3,7 @@
 from wtforms import Form, StringField, validators
 
 
-class PlaqSettingsForm(Form):
+class PlacSettingsForm(Form):
     ip_addr_regex = '^(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])$'
     ip_addr_message = 'Address must match the expected format ###.###.###.###, where each "###" is between 0 and 255'
     computer_name_regex = '^[A-Za-z0-9_-]+$'

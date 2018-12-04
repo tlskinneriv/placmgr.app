@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.debug = True
 
 # set up the hardware
-HWFuncs.serial_port = '/dev/ttyAMA0'
+HWFuncs.serial_port = '/dev/ttyS0'
 
 # takes care of showing pages and content
 for name, page in Pages.pages.items():

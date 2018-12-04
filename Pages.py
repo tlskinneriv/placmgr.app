@@ -2,7 +2,7 @@
 
 from flask import Flask, render_template, flash, redirect, url_for, session, logging, request
 import Forms
-from PlaqComm import PlaqComm
+from PlacComm import PlacComm
 import time
 
 class Page():
@@ -29,13 +29,13 @@ class Page():
 
 # declare and define basics of pages
 pages = {
-    'home' : Page('Plaq Manager', 'Home', 'home', '/'),
-    'plaq_settings' : Page('Plaq Settings', 'Plaq Settings', 'plaq_settings', '/plaq-settings')
+    'home' : Page('Plac Manager', 'Home', 'home', '/'),
+    'plac_settings' : Page('Plac Settings', 'Plac Settings', 'plac_settings', '/plac-settings')
 }
 
 # set navbar pages
 navbar_pages = [
-    pages['home'], pages['plaq_settings']
+    pages['home'], pages['plac_settings']
 ]
 
 # set default render function
@@ -43,21 +43,18 @@ def default_render_function(page, **kwargs):
     return render_template(page.template_name_full(), navbar_pages=navbar_pages, page_title=page.title, **kwargs)
 
 # set render function and other options for specific pages
-def plaq_settings_render(page):
-    form = Forms.PlaqSettingsForm(request.form)
+def plac_settings_render(page):
+    form = Forms.PlacSettingsForm(request.form)
     if request.method == 'POST' and form.validate():
-        # setup plaq comm handler
-        startTime = time.time()
-        plaq = PlaqComm('A1', 'plaq') #TODO dynamically get from DB
-        result = plaq.send_data(
+        # setup plac comm handler
+        plac = PlacComm('A1', 'plac') #TODO dynamically get from DB
+        result = plac.send_data(
             computer_name = form.computer_name.data,
             ip_address = form.ip_address.data,
             subnet_mask = form.subnet_mask.data,
             gateway = form.gateway.data,
             network = form.network.data
         )
-        endTime = time.time()
-        print("Total time: " + str(endTime-startTime))
         if result == True:
             message='<p class="message-good">Sent settings successfully.</p>'
         else:
@@ -65,5 +62,5 @@ def plaq_settings_render(page):
             print(str(result))
         return default_render_function(page, form=form, message=message)
     return default_render_function(page, form=form)
-pages['plaq_settings'].set_methods(['GET', 'POST'])
-pages['plaq_settings'].set_render_function(plaq_settings_render)
+pages['plac_settings'].set_methods(['GET', 'POST'])
+pages['plac_settings'].set_render_function(plac_settings_render)
