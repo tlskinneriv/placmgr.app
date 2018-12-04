@@ -12,8 +12,8 @@ class PlaqComm:
     def __init__(self, id, passkey):
         self.id = str(id)
         # ensure that the key is in face 256 bits by hashing
-        self.key = hashlib.sha256(str(passkey).encode()).digest()
-        self.aes_mode = AES.MODE_CBC
+        self.key = passkey #hashlib.sha256(str(passkey).encode()).digest()
+        #self.aes_mode = AES.MODE_CBC
 
     def send_data(self, **kwargs):
         try:
@@ -26,10 +26,11 @@ class PlaqComm:
             return e
 
     def __json_to_enc(self, json_string):
-        iv = Random.new().read(16) # always 16 bytes of random for IV
-        # iv = b'0123456789ABCDEF'
-        encryptor = AES.new(self.key, self.aes_mode, iv)
-        return iv + encryptor.encrypt(pad_data(json_string))
+        # iv = Random.new().read(16) # always 16 bytes of random for IV
+        # # iv = b'0123456789ABCDEF'
+        # encryptor = AES.new(self.key, self.aes_mode, iv)
+        # return iv + encryptor.encrypt(pad_data(json_string))
+        return json_string.encode()
 
     # included method to check against for decrypting data
     # def __enc_to_json(self, enc_data):
