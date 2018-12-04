@@ -3,6 +3,7 @@
 from flask import Flask, render_template, flash, redirect, url_for, session, logging, request
 import Forms
 from PlaqComm import PlaqComm
+import time
 
 class Page():
 
@@ -46,6 +47,7 @@ def plaq_settings_render(page):
     form = Forms.PlaqSettingsForm(request.form)
     if request.method == 'POST' and form.validate():
         # setup plaq comm handler
+        startTime = time.time()
         plaq = PlaqComm('A1', 'plaq') #TODO dynamically get from DB
         result = plaq.send_data(
             computer_name = form.computer_name.data,
@@ -54,6 +56,8 @@ def plaq_settings_render(page):
             gateway = form.gateway.data,
             network = form.network.data
         )
+        endTime = time.time()
+        print("Total time: " + str(endTime-startTime))
         if result == True:
             message='<p class="message-good">Sent settings successfully.</p>'
         else:
